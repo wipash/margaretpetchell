@@ -1,5 +1,8 @@
 <nav class="main-nav">
-    <ul>
+    <button class="menu-toggle" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+    </button>
+    <ul class="nav-menu">
         <li{{ if .IsHome }} class="active"{{ end }}>
             <a href="/">Home</a>
         </li>
@@ -8,10 +11,10 @@
         </li>
         <li class="has-submenu{{ if in .RelPermalink "tv-commercials" }} active{{ end }}">
             <a href="/tv-commercials/">TV Commercials</a>
-            <ul class="submenu">
+            {{/*  <ul class="submenu">
                 <li><a href="/tv-commercials/recent/">Recent Work</a></li>
                 <!-- Add other submenu items as needed -->
-            </ul>
+            </ul>  */}}
         </li>
         <li{{ if eq .RelPermalink "/fashion/" }} class="active"{{ end }}>
             <a href="/fashion/">Fashion</a>
