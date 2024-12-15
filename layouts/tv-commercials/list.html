@@ -1,0 +1,52 @@
+{{ define "main" }}
+<article class="page-content video-gallery">
+    <h1>{{ .Title }}</h1>
+
+    <div class="video-grid">
+        {{ range .Params.videos }}
+        <div class="video-card">
+            {{ if eq .type "mp4" }}
+            <div class="video-thumbnail video-trigger" data-video-url="https://pub-da38a66374054faa95c52b0d0dafe825.r2.dev/{{ .r2_filename }}">
+                <img src="{{ .thumbnail }}" alt="{{ .title }}">
+                <div class="play-button">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                </div>
+            </div>
+            {{ else if eq .type "youtube" }}
+            <div class="video-embed">
+                <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/{{ .video_id }}"
+                    title="{{ .title }}"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            {{ end }}
+            <div class="video-info">
+                <h2>{{ .title }}</h2>
+                <p class="director">Director: {{ .director }}</p>
+                <p class="production">Production Company: {{ .production }}</p>
+                <p class="credits">{{ .credits }}</p>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</article>
+
+<!-- Video Modal for MP4s -->
+<div class="video-modal" id="videoModal">
+    <div class="modal-content">
+        <button class="close-modal">&times;</button>
+        <video controls>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+<script src="{{ "js/video-modal.js" | relURL }}"></script>
+{{ end }}

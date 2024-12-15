@@ -203,3 +203,142 @@ main {
         margin-top: 20px;
     }
 }
+
+/* Video Gallery */
+.video-gallery {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.video-grid {
+    display: grid;
+    gap: 40px;
+    margin-top: 2rem;
+}
+
+.video-card {
+    background: white;
+}
+
+.video-thumbnail {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    overflow: hidden;
+    cursor: pointer; /* Add pointer cursor to show it's clickable */
+}
+
+.video-thumbnail:hover .play-button {
+    background: rgba(0,0,0,1); /* Maintain hover effect */
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 68px;
+    height: 48px;
+    padding: 0;  /* Remove any default padding */
+    display: flex;  /* Center the SVG icon */
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.8);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.play-button:hover {
+    background: rgba(0,0,0,1);
+}
+
+.play-button svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+    margin: 0;
+}
+
+.video-info {
+    padding: 1rem 0;
+}
+
+.video-info h2 {
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.video-info p {
+    margin: 0.25rem 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .video-grid {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+}
+
+/* Video Embeds */
+.video-embed {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+}
+
+.video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Modal for MP4s */
+.video-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 1000;
+}
+
+.video-modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.modal-content video {
+    width: 100%;
+}
+
+.close-modal {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
