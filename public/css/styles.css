@@ -1,0 +1,205 @@
+/* Base & Typography */
+@font-face {
+    font-family: 'Museo Slab';
+    src: url('../fonts/Museo_Slab_500.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Museo Slab', serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Home Page Specific */
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.home .wrapper {
+    width: 100%;
+    max-width: 800px;
+    padding: 0 30px;
+}
+
+.home .content {
+    text-align: center;
+    width: 100%;
+}
+
+.home h1 {
+    margin: 0;
+    padding: 5px 0;  /* Reduced from 10px for tighter spacing */
+    font-weight: 500;
+}
+
+.home .title {
+    font-size: 2.5rem;
+    color: #000;
+}
+
+.home .subtitle {
+    font-size: 2.5rem;
+    color: #000;
+    margin-bottom: 30px;  /* Increased spacing before menu */
+}
+
+.home .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;  /* Reduced from 10px for tighter spacing */
+}
+
+.home .menu a {
+    text-decoration: none;
+    color: #999;
+    font-size: 2.5rem;
+    transition: color 0.3s ease;
+}
+
+.home .menu a:hover {
+    color: #000;
+}
+
+/* Navigation */
+.main-nav {
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0;
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+.main-nav .active a {
+    color: #000;
+}
+
+/* Submenu */
+.has-submenu {
+    position: relative;
+}
+
+/* Submenu - make selector more specific */
+.main-nav ul .submenu {
+    display: none;  /* Now this will take priority */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    min-width: 200px;
+}
+
+.main-nav ul .has-submenu:hover .submenu {
+    display: block;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;  /* This ensures footer stays at bottom */
+    text-align: center;
+    padding: 2rem;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .submenu {
+        position: static;
+        box-shadow: none;
+    }
+}
+
+/* Regular page layout */
+.page-content {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 30px;
+}
+
+.page-content h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Ensure main content area fills space between nav and footer */
+main {
+    flex: 1;  /* This will make main content take up remaining space */
+    padding: 20px 0;
+}
+
+/* Bio page specific */
+.bio-page {
+    max-width: 1200px;  /* Wider to accommodate image */
+}
+
+.bio-content {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.bio-text {
+    flex: 1;
+}
+
+.bio-text h2.subtitle {
+    font-size: 1.5rem;
+    color: #666;
+    margin-top: -1rem;
+    margin-bottom: 1.5rem;
+    font-weight: normal;
+}
+
+.bio-image {
+    flex: 0 0 400px;  /* Adjust width as needed */
+}
+
+.bio-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive layout for bio page */
+@media (max-width: 768px) {
+    .bio-content {
+        flex-direction: column;
+    }
+
+    .bio-image {
+        flex: 0 0 auto;
+        width: 100%;
+        margin-top: 20px;
+    }
+}

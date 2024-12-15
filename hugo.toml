@@ -1,0 +1,9 @@
+baseURL = 'https://margaretpetchell.nz/'
+languageCode = 'en-us'
+title = 'Margaret Petchell'
+
+[params]
+  homeText = "You just made a Hugo blog from scratch."
+
+[permalinks]
+  blog = "/:filename/"

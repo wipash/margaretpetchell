@@ -1,0 +1,14 @@
+{{ define "main" }}
+<article class="page-content bio-page">
+    <div class="bio-content">
+        <div class="bio-text">
+            <h1>{{ .Title }}</h1>
+            {{ with .Params.subtitle }}<h2 class="subtitle">{{ . }}</h2>{{ end }}
+            {{ .Content }}
+        </div>
+        <div class="bio-image">
+            <img src="/img/profile-image.jpg" alt="Margaret Petchell">
+        </div>
+    </div>
+</article>
+{{ end }}

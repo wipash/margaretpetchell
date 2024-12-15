@@ -1,0 +1,26 @@
+<nav class="main-nav">
+    <ul>
+        <li{{ if .IsHome }} class="active"{{ end }}>
+            <a href="/">Home</a>
+        </li>
+        <li{{ if eq .RelPermalink "/bio/" }} class="active"{{ end }}>
+            <a href="/bio/">Bio</a>
+        </li>
+        <li class="has-submenu{{ if in .RelPermalink "tv-commercials" }} active{{ end }}">
+            <a href="/tv-commercials/">TV Commercials</a>
+            <ul class="submenu">
+                <li><a href="/tv-commercials/recent/">Recent Work</a></li>
+                <!-- Add other submenu items as needed -->
+            </ul>
+        </li>
+        <li{{ if eq .RelPermalink "/fashion/" }} class="active"{{ end }}>
+            <a href="/fashion/">Fashion</a>
+        </li>
+        <li>
+            <a href="http://margaretpetchellartist.com/">Artwork</a>
+        </li>
+        <li{{ if eq .RelPermalink "/contact/" }} class="active"{{ end }}>
+            <a href="/contact/">Contact</a>
+        </li>
+    </ul>
+</nav>
