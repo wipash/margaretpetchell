@@ -18,6 +18,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Dubiel";
+  src: url("../fonts/dubiel.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -180,6 +187,7 @@ footer {
 .home .subtitle {
   font-size: 2.5rem;
   color: #000;
+  font-family: "Dubiel", serif;
 }
 
 .home .subtitle {
@@ -190,6 +198,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  font-family: "Dubiel", serif;
 }
 
 .home .menu a {
