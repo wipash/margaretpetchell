@@ -1,0 +1,52 @@
+{{ define "main" }}
+<article class="page-content fashion-gallery">
+    <h1>{{ .Title }}</h1>
+
+    <div class="campaign-nav">
+        {{ range $campIndex, $campaign := .Params.campaigns }}
+        <button class="campaign-button {{ if eq $campIndex 0 }}active{{ end }}" data-campaign="{{ $campIndex }}">
+            {{ .name }}
+        </button>
+        {{ end }}
+    </div>
+
+    {{ range $campIndex, $campaign := .Params.campaigns }}
+    <div class="campaign-slides {{ if eq $campIndex 0 }}active{{ end }}" data-campaign="{{ $campIndex }}">
+        <div class="campaign-info">
+            <h2>{{ .name }}</h2>
+            {{ if .photography }}<p class="photography">Photography: {{ .photography }}</p>{{ end }}
+            <p class="credits">Styling, Hair and Make up: Margaret Petchell</p>
+        </div>
+
+        <div class="slider-container">
+            <div class="slider-content">
+                {{ range $slideIndex, $image := .images }}
+                <div class="slide {{ if eq $slideIndex 0 }}active{{ end }}" data-index="{{ $slideIndex }}">
+                    <img src="/img/fashion/{{ $image }}" alt="{{ $campaign.name }} - Image {{ add $slideIndex 1 }}">
+                </div>
+                {{ end }}
+            </div>
+
+            <button class="slider-arrow prev" aria-label="Previous slide">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+            </button>
+            <button class="slider-arrow next" aria-label="Next slide">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+            </button>
+
+            <div class="slider-dots">
+                {{ range $slideIndex, $image := .images }}
+                <button class="dot {{ if eq $slideIndex 0 }}active{{ end }}" data-index="{{ $slideIndex }}"></button>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+    {{ end }}
+</article>
+
+<script src="{{ "js/fashion-slider.js" | relURL }}"></script>
+{{ end }}
