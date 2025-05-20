@@ -12,12 +12,6 @@
 
     {{ range $campIndex, $campaign := .Params.campaigns }}
     <div class="campaign-slides {{ if eq $campIndex 0 }}active{{ end }}" data-campaign="{{ $campIndex }}">
-        <div class="campaign-info">
-            <h2>{{ .name }}</h2>
-            {{ if .photography }}<p class="photography">Photography: {{ .photography }}</p>{{ end }}
-            <p class="credits">Styling, Hair and Make up: Margaret Petchell</p>
-        </div>
-
         <div class="slider-container">
             <div class="slider-content">
                 {{ range $slideIndex, $image := .images }}
@@ -43,6 +37,12 @@
                 <button class="dot {{ if eq $slideIndex 0 }}active{{ end }}" data-index="{{ $slideIndex }}"></button>
                 {{ end }}
             </div>
+        </div>
+        
+        <div class="campaign-info">
+            <h2>{{ .name }}</h2>
+            {{ if .photography }}<p class="photography">Photography: {{ .photography }}</p>{{ end }}
+            <p class="credits">Styling, Hair and Make up: Margaret Petchell</p>
         </div>
     </div>
     {{ end }}

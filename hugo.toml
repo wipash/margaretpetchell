@@ -6,4 +6,4 @@ title = 'Margaret Petchell'
   homeText = "You just made a Hugo blog from scratch."
 
 [permalinks]
-  blog = "/:filename/"
+  blog = "/:contentbasename/"

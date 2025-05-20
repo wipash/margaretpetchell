@@ -395,28 +395,28 @@ footer {
 .campaign-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
   margin: 1.5rem 0;
+  justify-content: center;
 }
 
 .campaign-button {
-  background: #f5f5f5;
-  border: 1px solid #ddd;
-  padding: 8px 16px;
-  font-family: "PTSans", sans-serif;
-  font-size: 0.9rem;
+  background: transparent;
+  border: none;
+  padding: 8px 0;
+  font-family: "Dubiel", serif;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  color: #999;
+  transition: color 0.3s ease;
 }
 
 .campaign-button:hover {
-  background: #e0e0e0;
+  color: #666;
 }
 
 .campaign-button.active {
-  background: #333;
-  color: white;
-  border-color: #333;
+  color: #000;
 }
 
 /* Campaign Slides */
@@ -430,56 +430,70 @@ footer {
 }
 
 .campaign-info {
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+  text-align: left;
 }
 
 .campaign-info h2 {
-  font-size: 1.2rem;
-  margin: 0 0 0.5rem 0;
+  font-family: "Dubiel", serif;
+  font-size: 1rem;
+  margin: 0 0 0.3rem 0;
+  font-weight: 600;
 }
 
 .campaign-info p {
-  margin: 0.25rem 0;
+  margin: 0;
   color: #666;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  line-height: 1.3;
 }
 
 /* Slider Container */
 .slider-container {
   position: relative;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .slider-content {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: #f9f9f9;
+  background: #fff;
+  height: 500px; /* Fixed height container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slide {
   display: none;
   width: 100%;
+  height: 100%;
   transition: opacity 0.5s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .slide.active {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .slide img {
-  width: 100%;
-  display: block;
-  max-height: 80vh;
+  max-width: 100%;
+  max-height: 500px;
   object-fit: contain;
+  display: block;
 }
 
 /* Slider Navigation */
 .slider-arrow {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 250px; /* Position at middle of fixed height container */
+  margin-top: -24px; /* Half of the button height */
   width: 48px;
   height: 48px;
   background: rgba(255, 255, 255, 0.7);
@@ -544,9 +558,19 @@ footer {
     flex-direction: column;
   }
   
+  .slider-content {
+    height: 350px; /* Smaller fixed height for mobile */
+  }
+  
+  .slide img {
+    max-height: 350px;
+  }
+  
   .slider-arrow {
     width: 36px;
     height: 36px;
+    top: 175px; /* Half of mobile container height */
+    margin-top: -18px; /* Half of button height */
   }
   
   .slider-arrow svg {
