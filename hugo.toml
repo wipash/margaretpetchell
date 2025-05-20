@@ -1,9 +1,3 @@
-baseURL = 'https://margaretpetchell.nz/'
-languageCode = 'en-us'
+baseURL = 'https://margaretpetchell.com/'
+languageCode = 'en-nz'
 title = 'Margaret Petchell'
-
-[params]
-  homeText = "You just made a Hugo blog from scratch."
-
-[permalinks]
-  blog = "/:contentbasename/"
