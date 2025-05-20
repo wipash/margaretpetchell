@@ -1,7 +1,8 @@
 ---
 title: "Fashion"
 campaigns:
-  - name: "Servilles Campaign"
+  - name: "Servilles"
+    description: "Servilles Campaign"
     images:
       - "1-servilles.jpg"
       - "2-servilles.jpg"
@@ -10,7 +11,8 @@ campaigns:
       - "5-servilles.jpg"
       - "6-servilles.jpg"
 
-  - name: "So sweet - Koncierge Magazine"
+  - name: "Koncierge Magazine"
+    description: "So sweet - Koncierge Magazine"
     photography: "Mara Sommer"
     images:
       - "1-sweet-as.jpg"
@@ -23,7 +25,8 @@ campaigns:
       - "8-sweet-as.jpg"
       - "9-sweet-as.jpg"
 
-  - name: "The Settler- Reto Magazine Germany"
+  - name: "Retro Magazine"
+    description: "The Settler - Retro Magazine Germany"
     photography: "Mara Sommer"
     images:
       - "1-early-settler.jpg"
@@ -32,14 +35,16 @@ campaigns:
       - "4-early-settler.jpg"
       - "5-early-settler1.jpg"
 
-  - name: "Persimmon - Karen Magazine"
+  - name: "Karen Magazine"
+    description: "Persimmon - Karen Magazine"
     photography: "Mara Sommer"
     images:
       - "1-persimmon.jpg"
       - "2-persimmon.jpg"
       - "3-persimmon.jpg"
 
-  - name: "You Don’t See Me As I See Myself - Honk Magazine Germany"
+  - name: "Honk Magazine"
+    description: "You Don't See Me As I See Myself - Honk Magazine Germany"
     photography: "Mara Sommer"
     images:
       - "1-honk.jpg"
@@ -47,7 +52,8 @@ campaigns:
       - "3-honk.jpg"
       - "4-honk.jpg"
 
-  - name: "Sleep Alone - Always, Sometimes, Anytime Magazine "
+  - name: "Always | Sometimes | Anytime"
+    description: "Sleep Alone - Always | Sometimes | Anytime"
     photography: "Mara Sommer"
     images:
       - "1-sleeping.jpg"
@@ -61,6 +67,7 @@ campaigns:
       - "10-sleeping.jpg"
 
   - name: Black Magazine
+    description: Black Magazine
     photography: Sacha Stejko
     images:
       - Untitled-1.jpg
