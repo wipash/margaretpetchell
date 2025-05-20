@@ -7,7 +7,7 @@
         <div class="video-card">
             {{ if eq .type "mp4" }}
             <div class="video-thumbnail video-trigger" data-video-url="https://pub-da38a66374054faa95c52b0d0dafe825.r2.dev/{{ .r2_filename }}">
-                <img src="{{ .thumbnail }}" alt="{{ .title }}">
+                <img src="/img/{{ .thumbnail }}" alt="{{ .title }}">
                 <div class="play-button">
                     <svg viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z"/>
