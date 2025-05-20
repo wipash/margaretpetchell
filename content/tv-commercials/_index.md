@@ -2,12 +2,47 @@
 title: TV Commercials
 videos:
 
-  # - title: Some New Commercial
-  #   type: youtube
-  #   video_id: u2wZj7QlCwo
-  #   director: Director Name
-  #   production: Production Company
-  #   credits: Credits info
+  - title: TVNZ+ | Wooing Jeff
+    type: youtube
+    video_id: u2wZj7QlCwo
+    director:
+    production:
+    credits:
+
+  - title: TVNZ+ | Wrong Ride
+    type: youtube
+    video_id: h-E7xzpYk1c
+    director:
+    production:
+    credits:
+
+  - title: Air New Zealand presents “Not quite Silent Night”
+    type: youtube
+    video_id: ruUIHfQR2qg
+    director:
+    production:
+    credits:
+
+  - title: The One Thing You Need When One Thing Goes Wrong
+    type: youtube
+    video_id: AwGQMKQMNTw
+    director:
+    production:
+    credits:
+
+  - title: The One Thing You Need When Lightning strikes
+    type: youtube
+    video_id: z4vUeZdAY9o
+    director:
+    production:
+    credits:
+
+  - title: The Jewellers– a Michael Hill film
+    type: youtube
+    video_id: c5B-EM2_3v0
+    director:
+    production:
+    credits:
 
   - title: Evony Superbowl TVC - The King's Return
     type: mp4

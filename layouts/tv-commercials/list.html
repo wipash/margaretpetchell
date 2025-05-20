@@ -29,9 +29,9 @@
             {{ end }}
             <div class="video-info">
                 <h2>{{ .title }}</h2>
-                <p class="director">Director: {{ .director }}</p>
-                <p class="production">Production Company: {{ .production }}</p>
-                <p class="credits">{{ .credits }}</p>
+                {{ if .director }}<p class="director">Director: {{ .director }}</p>{{ end }}
+                {{ if .production }}<p class="production">Production Company: {{ .production }}</p>{{ end }}
+                {{ if .credits }}<p class="credits">{{ .credits }}</p>{{ end }}
             </div>
         </div>
         {{ end }}
