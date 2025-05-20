@@ -1,25 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
     const campaignButtons = document.querySelectorAll('.campaign-button');
+    const campaignSelect = document.getElementById('campaign-select');
     const campaignSlides = document.querySelectorAll('.campaign-slides');
     
-    // Campaign navigation
+    // Function to show campaign by index
+    function showCampaign(campaignIndex) {
+        // Update active button if in desktop view
+        campaignButtons.forEach(btn => btn.classList.remove('active'));
+        const activeButton = document.querySelector(`.campaign-button[data-campaign="${campaignIndex}"]`);
+        if (activeButton) {
+            activeButton.classList.add('active');
+        }
+        
+        // Show selected campaign
+        campaignSlides.forEach(campaign => {
+            campaign.classList.remove('active');
+            if (campaign.dataset.campaign === campaignIndex) {
+                campaign.classList.add('active');
+            }
+        });
+    }
+    
+    // Campaign button navigation (desktop)
     campaignButtons.forEach(button => {
         button.addEventListener('click', function() {
             const campaignIndex = this.dataset.campaign;
-            
-            // Update active button
-            campaignButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Show selected campaign
-            campaignSlides.forEach(campaign => {
-                campaign.classList.remove('active');
-                if (campaign.dataset.campaign === campaignIndex) {
-                    campaign.classList.add('active');
-                }
-            });
+            showCampaign(campaignIndex);
         });
     });
+    
+    // Campaign dropdown navigation (mobile)
+    if (campaignSelect) {
+        campaignSelect.addEventListener('change', function() {
+            const campaignIndex = this.value;
+            showCampaign(campaignIndex);
+        });
+    }
     
     // Initialize sliders for each campaign
     campaignSlides.forEach(campaign => {

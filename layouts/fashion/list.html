@@ -2,12 +2,20 @@
 <article class="page-content fashion-gallery">
     <h1>{{ .Title }}</h1>
 
-    <div class="campaign-nav">
+    <div class="campaign-nav desktop-nav">
         {{ range $campIndex, $campaign := .Params.campaigns }}
         <button class="campaign-button {{ if eq $campIndex 0 }}active{{ end }}" data-campaign="{{ $campIndex }}">
             {{ .name }}
         </button>
         {{ end }}
+    </div>
+    
+    <div class="campaign-dropdown mobile-nav">
+        <select id="campaign-select" aria-label="Select campaign">
+            {{ range $campIndex, $campaign := .Params.campaigns }}
+            <option value="{{ $campIndex }}" {{ if eq $campIndex 0 }}selected{{ end }}>{{ .name }}</option>
+            {{ end }}
+        </select>
     </div>
 
     {{ range $campIndex, $campaign := .Params.campaigns }}
