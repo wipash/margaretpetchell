@@ -321,13 +321,17 @@ footer {
 
 .video-info h2 {
   font-size: 1.2rem;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.25rem 0;
 }
 
 .video-info p {
-  margin: 0.25rem 0;
+  margin: 0 0;
   color: #666;
   font-size: 0.9rem;
+}
+
+.video-info .name {
+  color: #000;
 }
 
 .video-embed {
@@ -435,17 +439,22 @@ footer {
 }
 
 .campaign-info h2 {
-  font-family: "Dubiel", serif;
+  font-family: "PTSans", sans-serif;
   font-size: 1rem;
   margin: 0 0 0.3rem 0;
   font-weight: 600;
 }
 
 .campaign-info p {
+  font-family: "PTSans", sans-serif;
   margin: 0;
   color: #666;
   font-size: 0.8rem;
   line-height: 1.3;
+}
+
+.campaign-info .name {
+  color: #000
 }
 
 /* Slider Container */
@@ -557,22 +566,22 @@ footer {
   .campaign-nav {
     flex-direction: column;
   }
-  
+
   .slider-content {
     height: 350px; /* Smaller fixed height for mobile */
   }
-  
+
   .slide img {
     max-height: 350px;
   }
-  
+
   .slider-arrow {
     width: 36px;
     height: 36px;
     top: 175px; /* Half of mobile container height */
     margin-top: -18px; /* Half of button height */
   }
-  
+
   .slider-arrow svg {
     width: 18px;
     height: 18px;

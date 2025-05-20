@@ -29,9 +29,9 @@
             {{ end }}
             <div class="video-info">
                 <h2>{{ .title }}</h2>
-                {{ if .director }}<p class="director">Director: {{ .director }}</p>{{ end }}
-                {{ if .production }}<p class="production">Production Company: {{ .production }}</p>{{ end }}
-                {{ if .credits }}<p class="credits">{{ .credits }}</p>{{ end }}
+                {{ if .director }}<p class="director">Director: <span class="name">{{ .director }}</span></p>{{ end }}
+                {{ if .production }}<p class="production">Production Company: <span class="name">{{ .production }}</span></p>{{ end }}
+                {{ if .margaretcredit }}<p class="credits">{{ .margaretcredit }}: <span class="name">Margaret Petchell</span></p>{{ end }}
             </div>
         </div>
         {{ end }}
