@@ -1,29 +1,25 @@
-<nav class="main-nav">
-    <button class="menu-toggle" aria-label="Toggle menu">
-        <span class="hamburger"></span>
+<nav class="main-nav" aria-label="Primary">
+    <button type="button" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-menu">
+        <span class="hamburger" aria-hidden="true"></span>
     </button>
-    <ul class="nav-menu">
+    <ul class="nav-menu" id="site-menu">
         <li{{ if .IsHome }} class="active"{{ end }}>
-            <a href="/">Home</a>
+            <a href="/"{{ if .IsHome }} aria-current="page"{{ end }}>Home</a>
         </li>
         <li{{ if eq .RelPermalink "/bio/" }} class="active"{{ end }}>
-            <a href="/bio/">Bio</a>
+            <a href="/bio/"{{ if eq .RelPermalink "/bio/" }} aria-current="page"{{ end }}>Bio</a>
         </li>
-        <li class="has-submenu{{ if in .RelPermalink "tv-commercials" }} active{{ end }}">
-            <a href="/tv-commercials/">TV Commercials</a>
-            {{/*  <ul class="submenu">
-                <li><a href="/tv-commercials/recent/">Recent Work</a></li>
-                <!-- Add other submenu items as needed -->
-            </ul>  */}}
+        <li{{ if in .RelPermalink "tv-commercials" }} class="active"{{ end }}>
+            <a href="/tv-commercials/"{{ if in .RelPermalink "tv-commercials" }} aria-current="page"{{ end }}>TV Commercials</a>
         </li>
         <li{{ if eq .RelPermalink "/fashion/" }} class="active"{{ end }}>
-            <a href="/fashion/">Fashion</a>
+            <a href="/fashion/"{{ if eq .RelPermalink "/fashion/" }} aria-current="page"{{ end }}>Fashion</a>
         </li>
         <li>
-            <a href="http://margaretpetchellartist.com/">Artwork</a>
+            <a href="https://margaretpetchellartist.com/">Artwork</a>
         </li>
         <li{{ if eq .RelPermalink "/contact/" }} class="active"{{ end }}>
-            <a href="/contact/">Contact</a>
+            <a href="/contact/"{{ if eq .RelPermalink "/contact/" }} aria-current="page"{{ end }}>Contact</a>
         </li>
     </ul>
 </nav>

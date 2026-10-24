@@ -2,23 +2,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const campaignButtons = document.querySelectorAll('.campaign-button');
     const campaignSelect = document.getElementById('campaign-select');
     const campaignSlides = document.querySelectorAll('.campaign-slides');
-    
-    // Function to show campaign by index
+    const status = document.getElementById('fashion-slider-status');
+
+    function updateStatus(campaign) {
+        const slide = campaign.querySelector('.slide.active');
+        const count = campaign.querySelectorAll('.slide').length;
+        status.textContent = `${campaign.getAttribute('aria-label')}: Image ${Number(slide.dataset.index) + 1} of ${count}`;
+    }
+
     function showCampaign(campaignIndex) {
-        // Update active button if in desktop view
-        campaignButtons.forEach(btn => btn.classList.remove('active'));
-        const activeButton = document.querySelector(`.campaign-button[data-campaign="${campaignIndex}"]`);
-        if (activeButton) {
-            activeButton.classList.add('active');
-        }
-        
-        // Show selected campaign
+        campaignButtons.forEach(button => {
+            const active = button.dataset.campaign === campaignIndex;
+            button.classList.toggle('active', active);
+            button.setAttribute('aria-pressed', String(active));
+        });
+
         campaignSlides.forEach(campaign => {
-            campaign.classList.remove('active');
-            if (campaign.dataset.campaign === campaignIndex) {
-                campaign.classList.add('active');
+            const active = campaign.dataset.campaign === campaignIndex;
+            campaign.classList.toggle('active', active);
+            campaign.hidden = !active;
+            if (active) {
+                updateStatus(campaign);
             }
         });
+
+        if (campaignSelect) {
+            campaignSelect.value = campaignIndex;
+        }
     }
     
     // Campaign button navigation (desktop)
@@ -39,64 +49,60 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize sliders for each campaign
     campaignSlides.forEach(campaign => {
+        const slider = campaign.querySelector('.slider-container');
         const slides = campaign.querySelectorAll('.slide');
         const prevButton = campaign.querySelector('.slider-arrow.prev');
         const nextButton = campaign.querySelector('.slider-arrow.next');
         const dots = campaign.querySelectorAll('.dot');
         let currentIndex = 0;
         
-        // Function to show the current slide
         function showSlide(index) {
-            // Hide all slides
-            slides.forEach(slide => {
-                slide.classList.remove('active');
+            currentIndex = (index + slides.length) % slides.length;
+
+            slides.forEach((slide, slideIndex) => {
+                const active = slideIndex === currentIndex;
+                slide.classList.toggle('active', active);
+                slide.hidden = !active;
             });
-            
-            // Update dots
-            dots.forEach(dot => {
-                dot.classList.remove('active');
+
+            dots.forEach((dot, dotIndex) => {
+                const active = dotIndex === currentIndex;
+                dot.classList.toggle('active', active);
+                dot.setAttribute('aria-current', String(active));
             });
-            
-            // Show the current slide and dot
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
-            currentIndex = index;
+
+            if (campaign.classList.contains('active')) {
+                updateStatus(campaign);
+            }
         }
-        
-        // Event listener for previous button
+
         prevButton.addEventListener('click', function() {
-            let newIndex = currentIndex - 1;
-            if (newIndex < 0) {
-                newIndex = slides.length - 1;
-            }
-            showSlide(newIndex);
+            showSlide(currentIndex - 1);
         });
-        
-        // Event listener for next button
+
         nextButton.addEventListener('click', function() {
-            let newIndex = currentIndex + 1;
-            if (newIndex >= slides.length) {
-                newIndex = 0;
-            }
-            showSlide(newIndex);
+            showSlide(currentIndex + 1);
         });
         
         // Event listeners for dots
         dots.forEach(dot => {
             dot.addEventListener('click', function() {
-                const index = parseInt(this.dataset.index);
+                const index = Number(this.dataset.index);
                 showSlide(index);
             });
         });
         
-        // Keyboard navigation when campaign is active
-        campaign.addEventListener('keydown', function(e) {
-            if (campaign.classList.contains('active')) {
-                if (e.key === 'ArrowLeft') {
-                    prevButton.click();
-                } else if (e.key === 'ArrowRight') {
-                    nextButton.click();
-                }
+        slider.addEventListener('keydown', function(event) {
+            if (!campaign.classList.contains('active') || event.defaultPrevented ||
+                event.altKey || event.ctrlKey || event.metaKey || event.shiftKey ||
+                event.target.isContentEditable ||
+                event.target.closest('a, input, select, textarea, [role="textbox"], [role="combobox"], [role="spinbutton"], [role="slider"]')) {
+                return;
+            }
+
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                event.preventDefault();
+                showSlide(currentIndex + (event.key === 'ArrowLeft' ? -1 : 1));
             }
         });
         
@@ -104,15 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
         showSlide(0);
     });
     
-    // Global keyboard navigation
-    document.addEventListener('keydown', function(e) {
-        const activeCampaign = document.querySelector('.campaign-slides.active');
-        if (activeCampaign) {
-            if (e.key === 'ArrowLeft') {
-                activeCampaign.querySelector('.slider-arrow.prev').click();
-            } else if (e.key === 'ArrowRight') {
-                activeCampaign.querySelector('.slider-arrow.next').click();
-            }
-        }
-    });
+    if (campaignSelect) {
+        showCampaign(campaignSelect.value);
+    }
 });

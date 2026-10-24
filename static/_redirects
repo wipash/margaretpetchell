@@ -1,0 +1,6 @@
+# Cloudflare Pages consumes this file from Hugo's generated output.
+# Keep existing portfolio bookmarks and inbound links working on both hostnames.
+/tvc-recent-work /tv-commercials/ 301
+/tvc-recent-work/ /tv-commercials/ 301
+/fashion-stills /fashion/ 301
+/fashion-stills/ /fashion/ 301

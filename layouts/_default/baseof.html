@@ -9,9 +9,10 @@
     <script src="{{ "js/nav.js" | relURL }}"></script>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     {{ partial "nav.html" . }}
 
-    <main>
+    <main id="main-content" tabindex="-1">
         {{ block "main" . }}{{ end }}
     </main>
 

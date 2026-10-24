@@ -25,9 +25,44 @@
   font-style: normal;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px #fff;
+}
+
+.skip-link {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2000;
+  padding: 0.5rem 1rem;
+  color: #000;
+  background: #fff;
+  transform: translateY(calc(-100% - 2rem));
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
 body {
   margin: 0;
   padding: 0;
+  color: #000;
+  background: #fff;
   min-height: 100vh;
   font-family: "PTSans", sans-serif;
   line-height: 1.6;
@@ -46,6 +81,7 @@ main {
   max-width: 800px;
   margin: 2rem auto;
   padding: 0 30px;
+  overflow-wrap: anywhere;
 }
 
 .page-content h1 {
@@ -58,7 +94,7 @@ footer {
   margin-top: auto;
   text-align: center;
   padding: 2rem;
-  color: #999;
+  color: #666;
   font-size: 0.9rem;
 }
 
@@ -80,6 +116,7 @@ footer {
   padding: 0;
   margin: 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
 }
@@ -88,33 +125,16 @@ footer {
   font-family: "Dubiel", serif;
   font-size: 1.5rem;
   text-decoration: none;
-  color: #999;
+  color: #666;
   transition: color 0.3s ease;
 }
 
-.main-nav .active a {
+.main-nav a[aria-current="page"] {
   color: #000;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
-/* Submenu */
-.has-submenu {
-  position: relative;
-}
-
-.main-nav ul .submenu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: white;
-  padding: 0.5rem 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  min-width: 200px;
-}
-
-.main-nav ul .has-submenu:hover .submenu {
-  display: block;
-}
 
 /* Hamburger Menu */
 .menu-toggle {
@@ -122,6 +142,8 @@ footer {
   background: none;
   border: none;
   padding: 1rem;
+  width: 44px;
+  height: 44px;
   cursor: pointer;
   position: relative;
   z-index: 1002; /* Higher than the nav menu */
@@ -138,7 +160,14 @@ footer {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  transition: all 0.3s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+    transition: transform 0.15s ease-out, top 0.15s ease-out, bottom 0.15s ease-out;
+  }
 }
 
 .hamburger {
@@ -181,6 +210,7 @@ footer {
   width: 100%;
   max-width: 800px;
   padding: 0 30px;
+  box-sizing: border-box;
 }
 
 .home .content {
@@ -196,9 +226,10 @@ footer {
 
 .home .title,
 .home .subtitle {
-  font-size: 4rem;
+  font-size: clamp(2rem, 8vw, 4rem);
   color: #000;
   font-family: "Dubiel", serif;
+  overflow-wrap: anywhere;
 }
 
 .home .subtitle {
@@ -214,8 +245,9 @@ footer {
 
 .home .menu a {
   text-decoration: none;
-  color: #999;
-  font-size: 3rem;
+  color: #666;
+  font-size: clamp(1.75rem, 6vw, 3rem);
+  overflow-wrap: anywhere;
   transition: color 0.3s ease;
 }
 
@@ -273,6 +305,10 @@ footer {
 }
 
 .video-thumbnail {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
   position: relative;
   aspect-ratio: 16 / 9;
   background: #000;
@@ -353,39 +389,63 @@ footer {
 .video-modal {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  z-index: 1000;
+  inset: 0;
+  box-sizing: border-box;
+  width: min(100%, 1232px);
+  max-width: 100%;
+  max-height: 100dvh;
+  margin: auto;
+  padding: 1rem;
+  border: 0;
+  color: #fff;
+  background: transparent;
+  overflow: auto;
+  overscroll-behavior: contain;
 }
 
-.video-modal.active {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.video-modal[open] {
+  display: block;
+}
+
+.video-modal::backdrop {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+body.video-modal-open {
+  overflow: hidden;
 }
 
 .modal-content {
-  position: relative;
-  width: 90%;
-  max-width: 1200px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 0.5rem;
+  max-height: calc(100dvh - 2rem);
 }
 
 .modal-content video {
+  display: block;
   width: 100%;
+  min-height: 0;
+  max-height: calc(100dvh - 5.5rem);
+  object-fit: contain;
+  background: #000;
 }
 
 .close-modal {
-  position: absolute;
-  top: -40px;
-  right: 0;
-  color: white;
+  justify-self: end;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: #fff;
   font-size: 30px;
-  background: none;
-  border: none;
+  background: #000;
+  border: 0;
   cursor: pointer;
+}
+
+.video-modal :focus-visible {
+  outline-color: #fff;
+  box-shadow: 0 0 0 3px #000;
 }
 
 /* Fashion Slider */
@@ -411,7 +471,7 @@ footer {
   font-family: "Dubiel", serif;
   font-size: 1.2rem;
   cursor: pointer;
-  color: #999;
+  color: #666;
   transition: color 0.3s ease;
 }
 
@@ -421,6 +481,8 @@ footer {
 
 .campaign-button.active {
   color: #000;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 /* Campaign Slides */
@@ -479,7 +541,6 @@ footer {
   display: none;
   width: 100%;
   height: 100%;
-  transition: opacity 0.5s ease;
   position: absolute;
   top: 0;
   left: 0;
@@ -539,26 +600,32 @@ footer {
 .slider-dots {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 15px;
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ccc;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
   border: none;
   padding: 0;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
 
-.dot:hover {
-  background: #999;
+.dot::before {
+  content: "";
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #666;
+  border-radius: 50%;
 }
 
-.dot.active {
+.dot.active::before {
   background: #333;
 }
 
@@ -577,23 +644,13 @@ footer {
   padding: 10px;
   font-family: "Dubiel", serif;
   font-size: 1.1rem;
-  color: #999;
+  color: #666;
   background-color: #fff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #666;
   border-radius: 0;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23999%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
-.campaign-dropdown select:focus {
-  outline: none;
-  border-color: #999;
-}
 
 @media (max-width: 768px) {
   /* Show dropdown instead of buttons */
@@ -627,10 +684,10 @@ footer {
   }
 
   .slider-arrow {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     top: 175px; /* Half of mobile container height */
-    margin-top: -18px; /* Half of button height */
+    margin-top: -22px;
   }
 
   .slider-arrow svg {
@@ -643,8 +700,8 @@ footer {
   }
   
   .dot {
-    width: 8px;
-    height: 8px;
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -656,12 +713,14 @@ footer {
     position: absolute;
     top: 0;
     right: 1rem;
+    outline-offset: -3px;
   }
 
   .main-nav {
     position: relative;
     padding: 0;
     border-bottom: 1px solid #eee;
+    min-height: 44px;
   }
 
   .main-nav .nav-menu {
@@ -674,6 +733,9 @@ footer {
     border-bottom: 1px solid #eee;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1001;
+    max-height: calc(100dvh - 44px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .main-nav .nav-menu.active {
@@ -695,21 +757,6 @@ footer {
     padding: 1rem 0;
   }
 
-  .main-nav .nav-menu .submenu {
-    position: static;
-    box-shadow: none;
-    border-top: 1px solid #eee;
-    background: #f9f9f9;
-  }
-
-  .main-nav .nav-menu .submenu li {
-    border-bottom: none;
-  }
-
-  .main-nav .nav-menu .submenu a {
-    padding: 0.75rem 0;
-    font-size: 0.9em;
-  }
 
   /* Bio Page */
   .bio-content {

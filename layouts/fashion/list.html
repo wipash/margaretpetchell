@@ -4,7 +4,7 @@
 
     <div class="campaign-nav desktop-nav">
         {{ range $campIndex, $campaign := .Params.campaigns }}
-        <button class="campaign-button {{ if eq $campIndex 0 }}active{{ end }}" data-campaign="{{ $campIndex }}">
+        <button type="button" class="campaign-button {{ if eq $campIndex 0 }}active{{ end }}" data-campaign="{{ $campIndex }}" aria-pressed="{{ if eq $campIndex 0 }}true{{ else }}false{{ end }}" aria-controls="fashion-campaign-{{ $campIndex }}">
             {{ .name }}
         </button>
         {{ end }}
@@ -18,31 +18,33 @@
         </select>
     </div>
 
+    <p id="fashion-slider-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
+
     {{ range $campIndex, $campaign := .Params.campaigns }}
-    <div class="campaign-slides {{ if eq $campIndex 0 }}active{{ end }}" data-campaign="{{ $campIndex }}">
-        <div class="slider-container">
+    <div id="fashion-campaign-{{ $campIndex }}" class="campaign-slides {{ if eq $campIndex 0 }}active{{ end }}" data-campaign="{{ $campIndex }}" role="group" aria-label="{{ .name }}"{{ if ne $campIndex 0 }} hidden{{ end }}>
+        <div class="slider-container" role="group" aria-roledescription="carousel" aria-label="{{ .name }} images">
             <div class="slider-content">
                 {{ range $slideIndex, $image := .images }}
-                <div class="slide {{ if eq $slideIndex 0 }}active{{ end }}" data-index="{{ $slideIndex }}">
+                <div class="slide {{ if eq $slideIndex 0 }}active{{ end }}" data-index="{{ $slideIndex }}" role="group" aria-roledescription="slide" aria-label="Image {{ add $slideIndex 1 }} of {{ len $campaign.images }}"{{ if ne $slideIndex 0 }} hidden{{ end }}>
                     <img src="/img/fashion/{{ $image }}" alt="{{ $campaign.name }} - Image {{ add $slideIndex 1 }}">
                 </div>
                 {{ end }}
             </div>
 
-            <button class="slider-arrow prev" aria-label="Previous slide">
-                <svg viewBox="0 0 24 24">
+            <button type="button" class="slider-arrow prev" aria-label="Previous slide">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
                 </svg>
             </button>
-            <button class="slider-arrow next" aria-label="Next slide">
-                <svg viewBox="0 0 24 24">
+            <button type="button" class="slider-arrow next" aria-label="Next slide">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
                 </svg>
             </button>
 
             <div class="slider-dots">
                 {{ range $slideIndex, $image := .images }}
-                <button class="dot {{ if eq $slideIndex 0 }}active{{ end }}" data-index="{{ $slideIndex }}"></button>
+                <button type="button" class="dot {{ if eq $slideIndex 0 }}active{{ end }}" data-index="{{ $slideIndex }}" aria-label="Show image {{ add $slideIndex 1 }} of {{ len $campaign.images }}" aria-current="{{ if eq $slideIndex 0 }}true{{ else }}false{{ end }}"></button>
                 {{ end }}
             </div>
         </div>

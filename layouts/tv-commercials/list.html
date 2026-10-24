@@ -6,14 +6,14 @@
         {{ range .Params.videos }}
         <div class="video-card">
             {{ if eq .type "mp4" }}
-            <div class="video-thumbnail video-trigger" data-video-url="https://media.margaretpetchell.com/{{ .r2_filename }}">
-                <img src="/img/{{ .thumbnail }}" alt="{{ .title }}">
-                <div class="play-button">
-                    <svg viewBox="0 0 24 24">
+            <button type="button" class="video-thumbnail video-trigger" data-video-url="https://media.margaretpetchell.com/{{ .r2_filename }}" data-video-title="{{ .title }}" aria-label="Play {{ .title }}">
+                <img src="/img/{{ .thumbnail }}" alt="">
+                <span class="play-button" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false">
                         <path d="M8 5v14l11-7z"/>
                     </svg>
-                </div>
-            </div>
+                </span>
+            </button>
             {{ else if eq .type "youtube" }}
             <div class="video-embed">
                 <iframe
@@ -39,14 +39,14 @@
 </article>
 
 <!-- Video Modal for MP4s -->
-<div class="video-modal" id="videoModal">
+<dialog class="video-modal" id="videoModal" aria-labelledby="videoModalTitle">
     <div class="modal-content">
-        <button class="close-modal">&times;</button>
-        <video controls>
-            <source src="" type="video/mp4">
+        <button type="button" class="close-modal" aria-label="Close video" autofocus>&times;</button>
+        <h2 id="videoModalTitle" class="visually-hidden"></h2>
+        <video controls playsinline preload="metadata" aria-labelledby="videoModalTitle">
             Your browser does not support the video tag.
         </video>
     </div>
-</div>
+</dialog>
 <script src="{{ "js/video-modal.js" | relURL }}"></script>
 {{ end }}
